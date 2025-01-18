@@ -1,11 +1,13 @@
 import threading
 import time
+def bp(n):
+    return n**2
+
 start = time.time()
 n = int(input('Nhap so luong phan tu: '))
 arr = []
 rs = []
-def bp(n):
-    return n**2
+
 
 for i in range(n):
     arr.append(i+1)
@@ -15,4 +17,4 @@ for i in range(len(arr)):
 
 print('Mang sau khi binh phuong: ',rs)
 end = time.time()
-print(end-start)
+print('Thoi gian thuc hien la: ',end-start)
