@@ -2,11 +2,11 @@ import time
 import threading
 
 def thread1(i):
-    time.sleep(3)
+    time.sleep(i)
     print('No. printed by Thread 1: %d' %i)
 
 def thread2(i):
-    time.sleep(5)
+    time.sleep(i)
     print('No. printed by Thread 2: %d' %i)
 
 if __name__ == '__main__':
