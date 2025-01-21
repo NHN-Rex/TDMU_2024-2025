@@ -14,7 +14,7 @@ plt.figure(figsize=(10, 7))
 #(99, 17) là kernel size, phải là số lẻ, kích thước càng lớn thì độ làm mờ càng cao. sigmaY mặc định = sigmaX, nếu sigma=0
 # thư viện sẽ tự động tính sigma dựa theo kích thước kernel
 
-img_blur = cv.GaussianBlur(img, ksize=(99, 17), sigmaX=0)
+img_blur = cv.GaussianBlur(img, ksize=(15, 7), sigmaX=0)
 img_binary = cv.adaptiveThreshold(img_blur, maxValue=255, adaptiveMethod=cv.ADAPTIVE_THRESH_MEAN_C, 
                                   thresholdType=cv.THRESH_BINARY, blockSize=15, C=8)
 img_canny = cv.Canny(img_binary, 100, 200) # thực hiện loop để chọn ra lower threshold và upper threshold thích hợp
