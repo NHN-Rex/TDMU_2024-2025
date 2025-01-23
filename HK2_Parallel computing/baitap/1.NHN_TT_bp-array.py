@@ -12,10 +12,10 @@ for i in range(n):
     arr.append(i+1)
 print('Mang truoc khi binh phuong: ', arr)
 
-start = time.time()
+start = time.perf_counter()
 for i in range(len(arr)):
     rs.append(bp(arr[i]))
+end = time.perf_counter()
 
 print('Mang sau khi binh phuong: ',rs)
-end = time.time()
 print('Thoi gian thuc hien la: ',end-start)

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import ndimage
 
-file_path = "khuy.png"
+file_path = "visit.png"
 
 # chuyen thanh anh nhi phan
 img = cv.imread(file_path, cv.IMREAD_GRAYSCALE)
@@ -14,7 +14,7 @@ plt.figure(figsize=(10, 7))
 #(99, 17) là kernel size, phải là số lẻ, kích thước càng lớn thì độ làm mờ càng cao. sigmaY mặc định = sigmaX, nếu sigma=0
 # thư viện sẽ tự động tính sigma dựa theo kích thước kernel
 
-img_blur = cv.GaussianBlur(img, ksize=(3, 3), sigmaX=0)
+img_blur = cv.GaussianBlur(img, ksize=(15, 15), sigmaX=0)
 img_binary = cv.adaptiveThreshold(img_blur, maxValue=255, adaptiveMethod=cv.ADAPTIVE_THRESH_MEAN_C, 
                                   thresholdType=cv.THRESH_BINARY, blockSize=15, C=8)
 img_canny = cv.Canny(img_binary, 100, 200) # thực hiện loop để chọn ra lower threshold và upper threshold thích hợp
@@ -27,9 +27,9 @@ plt.imshow(img, cmap='gray')
 plt.title("original_gray")
 
 plt.subplot(2, 2, 2)
-plt.imshow(img_blur, cmap='gray')
+plt.imshow(img_binary, cmap='gray')
 
-plt.title("blur")
+plt.title("binary")
 
 plt.subplot(2, 2, 3)
 plt.imshow(img_canny, cmap='gray')
