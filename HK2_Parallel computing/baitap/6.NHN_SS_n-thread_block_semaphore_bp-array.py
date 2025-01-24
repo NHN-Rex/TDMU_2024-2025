@@ -1,24 +1,17 @@
 from threading import Thread, Semaphore
 import time
-semaphore = Semaphore(2)
-def bp(arr):
-    for i in range(start, len(arr), 2):
-        arr[i] = arr[i]**2
-    return arr
-    
+semaphore = Semaphore(3)
 
-
-def sq(arr, rs, name, start, end):
-    print("Function sq: " + name + " waiting for rLock sq")
+def sq(arr, rs, name):
+     
+    print(f"Thread {name} is waiting for his turn")
     semaphore.acquire()
-    print("Acquired rLock sq: " + name)
-    print("Function sq: " + name + " Executing Code sq....")
-    # rs.append(bp(arr, rlock, name))
-    rs=bp(arr)
-    # rs.sort()
-    print(f"Mang sau binh phuong sau khi {name} chay: ", rs)
+    
+    print(f"Thread {name} is playing")
+    rs.append(arr[name]**2)
+    
+    print(f"Thread {name} has left the playground")
     semaphore.release()
-    print("Function bp: " + name + " Releases rLock sq")
 
 if __name__ == '__main__':
 
@@ -31,11 +24,13 @@ if __name__ == '__main__':
     start = time.perf_counter()
     children = []
 
-    for i in range(10):
-        children.append(Thread(target=sq, args = (arr, rs, f'Thread {i}', )))
+    for i in range(n):
+        children.append(Thread(target=sq, args = (arr, rs, i, )))
         children[i].start()
 
-    for i in range(10):
+    for i in range(n):
         children[i].join()
+    rs.sort()
+    print('ket qua: ', rs)
     end = time.perf_counter()
     print('Thoi gian thuc hien la: ',end-start)
