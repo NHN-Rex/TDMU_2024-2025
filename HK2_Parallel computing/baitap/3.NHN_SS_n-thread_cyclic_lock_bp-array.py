@@ -1,28 +1,33 @@
 from threading import Thread, Lock
 import time
+lock = Lock()
 
 def bp(n):
     return n**2
 
-lock = Lock()
-def sq(data, name, lock):
-    print(f"Thread {name}: ", end='')
+
+def sq(arr,rs, name, lock, start):
     print("Waiting for Lock: " + name)
-    rs = []
     lock.acquire()
-    for i in data:
-        rs.append(bp(i))
-    print("Mang sau khi binh phuong: ", rs)
+    print("Acquired Lock: " + name)
+    print('Is running: ' + name)
+    for i in range(start, len(arr), 2):
+        rs.append(bp(arr[i]))
+    rs.sort()
+    print(f"Mang sau binh phuong sau khi {name} chay: ", rs)
     lock.release()
-    print("Released Lock")
+    print(f"Released Lock: {name}")
+
 if __name__ == '__main__':
-    n = 10
+    rs = []
+    # n = 10
+    n = int(input('Nhap so luong phan tu: '))
     arr = []
     for i in range(n):
         arr.append(i+1)
     start = time.perf_counter()
-    thread1 = Thread(target=sq, args=(arr[:int(len(arr)/2)], 'Thread 1', lock))
-    thread2 = Thread(target=sq, args=(arr[int(len(arr)/2):], 'Thread 2', lock))
+    thread1 = Thread(target=sq, args=(arr, rs, 'Thread 1', lock, 0))
+    thread2 = Thread(target=sq, args=(arr, rs, 'Thread 2', lock, 1))
     thread1.start()
     thread2.start()
 

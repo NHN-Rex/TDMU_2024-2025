@@ -1,6 +1,6 @@
 from threading import Thread, Lock
 import time
-
+lock = Lock()
 def bp(n):
     return n**2
 
@@ -17,7 +17,7 @@ def sq(arr,rs, name, lock):
     print(f"Released Lock: {name}")
 
 if __name__ == '__main__':
-    lock = Lock()
+
     rs = []
     # n = 10
     n = int(input('Nhap so luong phan tu: '))
