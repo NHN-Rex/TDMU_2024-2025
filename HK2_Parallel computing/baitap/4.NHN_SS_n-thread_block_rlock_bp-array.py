@@ -8,6 +8,7 @@ def bp(arr, rlock, name):
     print("Function bp: " + name + " Executing Code bp....")
     for i in range(len(arr)):
         arr[i] = arr[i]**2
+    time.sleep(1)
     rlock.release()
     print("Function bp: " + name + " Releases rLock bp")
     return arr
@@ -21,9 +22,10 @@ def sq(arr,rs, name, rlock):
     print("Function sq: " + name + " Executing Code sq....")
     # rs.append(bp(arr, rlock, name))
     rs+=bp(arr, rlock, name)
+    time.sleep(1)
     print(f"Mang sau binh phuong sau khi {name} chay: ", rs)
     rlock.release()
-    print("Function bp: " + name + " Releases rLock sq")
+    print("Function sp: " + name + " Releases rLock sq")
 
 if __name__ == '__main__':
 

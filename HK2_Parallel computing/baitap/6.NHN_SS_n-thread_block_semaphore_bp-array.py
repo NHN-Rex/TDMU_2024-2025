@@ -9,6 +9,7 @@ def sq(arr, rs, name):
     
     print(f"Thread {name} is playing")
     rs.append(arr[name]**2)
+    time.sleep(1)
     
     print(f"Thread {name} has left the playground")
     semaphore.release()

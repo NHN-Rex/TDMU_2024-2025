@@ -7,6 +7,7 @@ def bp(arr, index, rlock, name):
     print("Acquired rLock bp: " + name)
     print("Function bp: " + name + " Executing Code bp....")
     arr[index] = arr[index]**2
+    time.sleep(1)
     rlock.release()
     print("Function bp: " + name + " Releases rLock bp")
     return arr[index]
@@ -20,6 +21,7 @@ def sq(arr,index,rs, name, rlock):
     print("Function sq: " + name + " Executing Code sq....")
     # rs.append(bp(arr, rlock, name))
     rs.append(bp(arr, index, rlock, name))
+    time.sleep(1)
     # rs.sort()
     print(f"Mang sau binh phuong sau khi {name} chay: ", rs)
     rlock.release()

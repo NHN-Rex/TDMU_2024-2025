@@ -12,6 +12,7 @@ def sq(arr,rs, name, lock):
     print('Is running: ' + name)
     for i in arr:
         rs.append(bp(i))
+    time.sleep(1)
     print(f"Mang sau binh phuong sau khi {name} chay: ", rs)
     lock.release()
     print(f"Released Lock: {name}")
