@@ -4,8 +4,8 @@ import time
 def bp(n):
     return n**2
 
-# n = int(input('Nhap so luong phan tu: '))
-n = 1000
+n = int(input('Nhap so luong phan tu: '))
+# n = 1000
 arr = []
 rs = []
 for i in range(n):
