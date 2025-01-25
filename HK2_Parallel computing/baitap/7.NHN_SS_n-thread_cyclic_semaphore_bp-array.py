@@ -1,29 +1,17 @@
-from threading import Thread, RLock
+from threading import Thread, Semaphore
 import time
-rlock = RLock()
-def bp(arr, rlock, name):
-    print("Function bp: " + name + " Waiting for rLock bp")
-    rlock.acquire()
-    print("Acquired rLock bp: " + name)
-    print("Function bp: " + name + " Executing Code bp....")
-    for i in range(len(arr)):
-        arr[i] = arr[i]**2
-    rlock.release()
-    print("Function bp: " + name + " Releases rLock bp")
-    return arr
+semaphore = Semaphore(3)
+
+def sq(arr, rs, name):
+     
+    print(f"Thread {name} is waiting for his turn")
+    semaphore.acquire()
     
-
-
-def sq(arr,rs, name, rlock):
-    print("Function sq: " + name + " waiting for rLock sq")
-    rlock.acquire()
-    print("Acquired rLock sq: " + name)
-    print("Function sq: " + name + " Executing Code sq....")
-    # rs.append(bp(arr, rlock, name))
-    rs+=bp(arr, rlock, name)
-    print(f"Mang sau binh phuong sau khi {name} chay: ", rs)
-    rlock.release()
-    print("Function bp: " + name + " Releases rLock sq")
+    print(f"Thread {name} is playing")
+    rs.append(arr[name]**2)
+    
+    print(f"Thread {name} has left the playground")
+    semaphore.release()
 
 if __name__ == '__main__':
 
@@ -34,12 +22,15 @@ if __name__ == '__main__':
     for i in range(n):
         arr.append(i+1)
     start = time.perf_counter()
-    thread1 = Thread(target=sq, args=(arr[:int(len(arr)/2)],rs, 'Thread 1', rlock))
-    thread2 = Thread(target=sq, args=(arr[int(len(arr)/2):],rs, 'Thread 2', rlock))
-    thread1.start()
-    thread2.start()
+    children = []
 
-    thread2.join()
-    thread1.join()
+    for i in range(n):
+        children.append(Thread(target=sq, args = (arr, rs, i, )))
+        children[i].start()
+
+    for children in children:
+        children.join()
+    rs.sort()
+    print('ket qua: ', rs)
     end = time.perf_counter()
     print('Thoi gian thuc hien la: ',end-start)

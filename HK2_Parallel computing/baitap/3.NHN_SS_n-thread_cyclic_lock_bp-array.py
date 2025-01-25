@@ -6,11 +6,11 @@ lock = Lock()
 def sq(arr, rs, id, lock, index):
     print(f"Waiting for Lock: Thread {id}")
     lock.acquire()
-    print(f"Acquired Lock: Thread {id}")
+    # print(f"Acquired Lock: Thread {id}")
     print(f"Thread {id}: arr[{index}] = {arr[index]} = {arr[index]**2}")
     rs.append(arr[index]**2)
-    lock.release() 
     print(f"Release Lock: Thread {id}")
+    lock.release()
 
 if __name__ == '__main__':
     rs = []
