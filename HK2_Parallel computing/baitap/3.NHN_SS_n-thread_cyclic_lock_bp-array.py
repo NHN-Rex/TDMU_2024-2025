@@ -9,7 +9,7 @@ def sq(arr, rs, id, lock, index):
     # print(f"Acquired Lock: Thread {id}")
     print(f"Thread {id}: arr[{index}] = {arr[index]} = {arr[index]**2}")
     rs.append(arr[index]**2)
-    time.sleep(1)
+    # time.sleep(1)
     print(f"Release Lock: Thread {id}")
     lock.release()
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     n = int(input('Nhap so luong phan tu: '))
     arr = []
     threads = []
-    num_threads = 4
+    num_threads = int(input('Nhap so luong thread: '))
     for i in range(n):
         arr.append(i+1)
     start = time.perf_counter()

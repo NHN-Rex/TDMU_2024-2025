@@ -31,8 +31,8 @@ if __name__ == '__main__':
 
     rs = []
     # n = 10
-    numthreads = 4
     n = int(input('Nhap so luong phan tu: '))
+    numthreads = int(input('Nhap so luong thread: '))
     arr = []
     threads = []
     for i in range(n):
